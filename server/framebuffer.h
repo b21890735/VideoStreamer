@@ -22,7 +22,7 @@ Frame EMPTY_FRAME;
 // function to create a queue
 // of given capacity.
 // It initializes size of queue as 0
-Queue* createQueue(unsigned capacity)
+Queue* create_buffer(unsigned capacity)
 {
     Queue* queue = (Queue*)malloc(
         sizeof(Queue));
@@ -36,24 +36,24 @@ Queue* createQueue(unsigned capacity)
     return queue;
 }
  
-// Queue is full when size becomes
+// queue is full when size becomes
 // equal to the capacity
-int isFull(Queue* queue)
+int is_full(Queue* queue)
 {
     return (queue->size == queue->capacity);
 }
  
-// Queue is empty when size is 0
-int isEmpty(Queue* queue)
+// queue is empty when size is 0
+int is_empty(Queue* queue)
 {
     return (queue->size == 0);
 }
  
-// Function to add an item to the queue.
-// It changes rear and size
+// function to add an item to the queue.
+// it changes rear and size
 void enqueue(Queue* queue, Frame item)
 {
-    if (isFull(queue)){
+    if (is_full(queue)){
         return;
     }
     queue->rear = (queue->rear + 1)
@@ -62,11 +62,11 @@ void enqueue(Queue* queue, Frame item)
     queue->size = queue->size + 1;
 }
  
-// Function to remove an item from queue.
-// It changes front and size
+// function to remove an item from queue.
+// it changes front and size
 Frame dequeue(Queue* queue)
 {
-    if (isEmpty(queue))
+    if (is_empty(queue))
         return EMPTY_FRAME;
     Frame item = queue->array[queue->front];
     queue->front = (queue->front + 1)
@@ -75,18 +75,18 @@ Frame dequeue(Queue* queue)
     return item;
 }
  
-// Function to get front of queue
+// function to get front of queue
 Frame front(Queue* queue)
 {
-    if (isEmpty(queue))
+    if (is_empty(queue))
         return EMPTY_FRAME;
     return queue->array[queue->front];
 }
  
-// Function to get rear of queue
+// function to get rear of queue
 Frame rear(Queue* queue)
 {
-    if (isEmpty(queue))
+    if (is_empty(queue))
         return EMPTY_FRAME;
     return queue->array[queue->rear];
 }
