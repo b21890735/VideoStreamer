@@ -12,7 +12,7 @@ public class Feeder extends Thread{
 
     public void run()
     {
-        synchronized(viewer)      //Synchronized block
+        synchronized(frame)      //Synchronized block
         {
             viewer.display(frame, this.gui);
         }
