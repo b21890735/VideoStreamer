@@ -1,0 +1,32 @@
+import javax.swing.*;
+import java.awt.*;
+
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
+
+public class GUI {
+    JTextArea area = new JTextArea("ASCII VIDEO STREAMER");
+    JFrame f= new JFrame();
+
+    public JTextArea getArea() {
+        return area;
+    }
+
+    public void setArea(JTextArea area) {
+        this.area = area;
+    }
+
+    GUI(String buffer) throws InterruptedException {
+        this.f.setSize(500,300);
+        this.f.setLayout(null);
+        this.f.setVisible(true);
+        this.area.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
+        this.f.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.area.setText(buffer);
+        this.area.setBounds(0,0, 500,300);
+        this.f.add(this.area);
+
+        /* TODO CLOSE butonuna basınca socket bağlantısı kopacak */
+
+        Thread.sleep(50);
+    }
+}
