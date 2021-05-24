@@ -31,7 +31,6 @@ public class FeederViewer {
             while (true) {
                 synchronized (this) {
                     while (buffer.size() == capacity){
-                        System.out.println("BUFFER IS FULL");
                         wait();
                     }
 
@@ -69,7 +68,6 @@ public class FeederViewer {
                     // consumer thread waits while buffer
                     // is empty
                     while (buffer.size() == 0){
-                        System.out.println("BUFFER IS EMPTY");
                         wait();
                     }
 

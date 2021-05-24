@@ -1,7 +1,7 @@
 import java.io.*;
 import java.net.Socket;
 
-public class Main {
+public class sclient {
     public static void main(String[] args) throws Exception {
         try {
             //get arguments from command line
@@ -29,11 +29,6 @@ public class Main {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
-            // Reading data using readLine
-            String str = "";
-            str = br.readLine();
-            System.out.println(str);
 
             //send channelID to server via socket
             //so that server send related channel data to client

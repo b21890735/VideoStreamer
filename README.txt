@@ -9,10 +9,10 @@ For example,
 
 The client part of the project can be runned as:
 javac *
-java Main  –a address –p port –ch channelID
+java sclient  –a address –p port –ch channelID
 
 For example,
-java Main -a 127.0.0.1 -p 2001 -ch 1
+java sclient -a 127.0.0.1 -p 2001 -ch 1
 
 ***In my application, more than one client can connect to the same channel. So they can watch the same channel at the same time.
 
@@ -30,8 +30,8 @@ java Main -a 127.0.0.1 -p 2001 -ch 1
 
 **Since multiple clients can watch the stream, if one of them disconnects, other can continue to watch without any delay or problem.
 
-**Inside framebuffer.h file, I implemented Frame and Queue structs for buffer, and implemented necessary functins for buffer inside it. 
+**Inside framebuffer.h file, I implemented Frame and Queue structs for buffer, and implemented necessary functions for buffer inside it.
 
-**I have written a lots of comments inside source files, further details can be understood from them.
+**I have written a lots of comments inside source files, further details can be understood by reading them.
 
 
