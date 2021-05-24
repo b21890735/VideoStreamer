@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 public class FeederViewer {
-    // This class has a buffer, producer (adds items to buffer
-    // and consumer (removes items).
+    // this class has a buffer, feeder (adds items to buffer
+    // and viewer (removes items).
     public static class PC {
 
-        // Create a buffer shared by producer and consumer
-        // Size of buffer is 2.
+        // create a buffer shared by producer and consumer
+        // size of buffer is 2.
         LinkedList<String> buffer = new LinkedList<>();
         int capacity = 2;
 
@@ -36,9 +36,12 @@ public class FeederViewer {
 
                     int counter = 0;
                     String totalFrame = "";
+
                     //read entire frame and send it to feeder
                     while (counter < 14) {
+
                         String str = br.readLine();
+
                         if (counter != 0) {
                             totalFrame = totalFrame.concat(str + '\n');
                         }
@@ -61,7 +64,7 @@ public class FeederViewer {
 
         }
 
-        // Function called by consumer thread
+        // function called by consumer thread
         public void consume() throws InterruptedException {
             while (true) {
                 synchronized (this) {

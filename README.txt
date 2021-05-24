@@ -9,7 +9,7 @@ For example,
 
 The client part of the project can be runned as:
 javac *
-java sclient  –a address –p port –ch channelID
+java sclient –a address –p port –ch channelID
 
 For example,
 java sclient -a 127.0.0.1 -p 2001 -ch 1
@@ -18,11 +18,11 @@ java sclient -a 127.0.0.1 -p 2001 -ch 1
 
 **I implemented all functionalities by myself, did not use any undesired data structures or libraries.
 
-**In the Java (client) part, I have used Java Swing, Jframe. Creted to different Thread classes which are Viewer and Feeder inherited from Thread class
+**In the Java (client) part, I have used Java Swing, Jframe. Created different Thread classes which are Viewer and Feeder inherited from Thread class
 
-**For the server part (C), diffferent semaphores and threads are used. 
+**For the server part (C), different semaphores and threads are used.
 
-**I created a struct namely 'Channel' for channels and put necessary fields such as buffer, name, status, threads and semaphores.
+**I created a struct, namely 'Channel' ,for channels and put necessary fields such as buffer, name, status, threads and semaphores.
 
 **The program can be closed by clicking close button in the left corner. When user clicks it, client disconnects from the socket, server realizes that and stop sending data to that client. 
 

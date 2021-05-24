@@ -30,6 +30,8 @@ public class sclient {
                 e.printStackTrace();
             }
 
+            br.readLine();
+
             //send channelID to server via socket
             //so that server send related channel data to client
             dout.write(channelID);
