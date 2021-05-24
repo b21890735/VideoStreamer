@@ -31,7 +31,7 @@ public class Main {
             }
 
             // Reading data using readLine
-            String str = "", str2 = "";
+            String str = "";
             str = br.readLine();
             System.out.println(str);
 
@@ -42,7 +42,7 @@ public class Main {
 
             final FeederViewer.PC pc = new FeederViewer.PC(dout, br, gui);
 
-            // Create feeder thread
+            // create feeder thread
             Thread feeder = new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -55,7 +55,7 @@ public class Main {
                 }
             });
 
-            // Create viewer thread
+            // create viewer thread
             Thread viewer = new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -76,8 +76,8 @@ public class Main {
             feeder.join();
             viewer.join();
 
-            //dout.close();
-            //s.close();
+            dout.close();
+            s.close();
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.LinkedList;
 
 public class FeederViewer {
@@ -12,7 +11,8 @@ public class FeederViewer {
         // Create a buffer shared by producer and consumer
         // Size of buffer is 2.
         LinkedList<String> buffer = new LinkedList<>();
-        int capacity = 500;
+        int capacity = 2;
+
         //create output stream to write data to stream
         DataOutputStream dout;
 
@@ -30,8 +30,10 @@ public class FeederViewer {
         public void produce() throws InterruptedException, IOException {
             while (true) {
                 synchronized (this) {
-                    while (buffer.size() == capacity)
+                    while (buffer.size() == capacity){
+                        System.out.println("BUFFER IS FULL");
                         wait();
+                    }
 
                     int counter = 0;
                     String totalFrame = "";
@@ -44,18 +46,17 @@ public class FeederViewer {
                         counter++;
                     }
 
-                    System.out.println("Producer produced-");
-                    System.out.println( totalFrame);
+                    //add data read from socket to buffer
                     buffer.add(totalFrame);
-                    notify();
 
+                    // wake up consumer thread
+                    notify();
 
                     //send data to server via socket
                     //so that it continues to send data
                     dout.write('\n');
                     dout.flush();
 
-                    //Thread.sleep(50);
                 }
             }
 
@@ -64,27 +65,21 @@ public class FeederViewer {
         // Function called by consumer thread
         public void consume() throws InterruptedException {
             while (true) {
-                synchronized (this)
-                {
+                synchronized (this) {
                     // consumer thread waits while buffer
                     // is empty
-                    while (buffer.size() == 0)
+                    while (buffer.size() == 0){
+                        System.out.println("BUFFER IS EMPTY");
                         wait();
+                    }
 
-                    // to retrive the ifrst job in the buffer
+                    // to retrive the first job in the buffer
                     String val = buffer.removeFirst();
 
-                    // Wake up producer thread
+                    // wake up feeder thread
                     notify();
 
-                    System.out.println("Consumer consumed-");
-                    System.out.println(val);
-
                     display(val);
-
-
-                    // and sleep
-                    //Thread.sleep(50);
                 }
             }
         }
