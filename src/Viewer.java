@@ -1,7 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
 
 public class Viewer extends Thread {
     public Viewer() {
@@ -12,6 +8,7 @@ public class Viewer extends Thread {
         var2.f.add(var2.getArea());
 
         try {
+            //sleep thread for 50 ms in order to achieve 20 frame rate
             Thread.sleep(50);
         } catch (InterruptedException var4) {
             var4.printStackTrace();

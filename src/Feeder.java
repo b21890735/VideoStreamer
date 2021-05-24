@@ -3,6 +3,7 @@ public class Feeder extends Thread{
     Viewer viewer;
     GUI gui;
 
+    //constructor
     Feeder (Viewer fp, String str, GUI gui) {
         viewer = fp;
         frame = str;
@@ -12,7 +13,8 @@ public class Feeder extends Thread{
 
     public void run()
     {
-        synchronized(frame)      //Synchronized block
+        //synchronized block
+        synchronized(frame)
         {
             viewer.display(frame, this.gui);
         }
