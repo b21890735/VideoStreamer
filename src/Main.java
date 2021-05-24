@@ -20,7 +20,6 @@ public class Main {
 
             //buffered reader for socket input
             BufferedReader br = new BufferedReader(new InputStreamReader(din));
-            String totalFrame = "";
 
             //create GUI object
             GUI gui = null;
@@ -30,9 +29,6 @@ public class Main {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
-            //viewer thread
-            Viewer viewer = new Viewer();
 
             // Reading data using readLine
             String str = "", str2 = "";
@@ -44,26 +40,41 @@ public class Main {
             dout.write(channelID);
             dout.flush();
 
-            while (true) {
-                int counter = 0;
-                totalFrame = "";
-                //read entire frame and send it to feeder
-                while (counter < 14) {
-                    str = br.readLine();
-                    if (counter != 0) {
-                        totalFrame = totalFrame.concat(str + '\n');
+            final FeederViewer.PC pc = new FeederViewer.PC(dout, br, gui);
+
+            // Create feeder thread
+            Thread feeder = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        pc.produce();
                     }
-                    counter++;
+                    catch (InterruptedException | IOException e) {
+                        e.printStackTrace();
+                    }
                 }
+            });
 
-                //feeder thread update
-                Feeder feeder = new Feeder(viewer, totalFrame, gui);
+            // Create viewer thread
+            Thread viewer = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        pc.consume();
+                    }
+                    catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
 
-                //send data to server via socket
-                //so that it continues to send data
-                dout.write('\n');
-                dout.flush();
-            }
+            // Start both threads
+            feeder.start();
+            viewer.start();
+
+            // feeder finishes before viewer
+            feeder.join();
+            viewer.join();
 
             //dout.close();
             //s.close();
