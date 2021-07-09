@@ -15,7 +15,7 @@ java sclient –a address –p port –ch channelID
 For example,
 java sclient -a 127.0.0.1 -p 2001 -ch 1
 
-***In my application, more than one client can connect to the same channel. So they can watch the same channel at the same time.
+***In the application, more than one client can connect to the same channel. So they can watch the same channel at the same time.
 
 **In the Java (client) part, I have used Java Swing, Jframe. Created different Thread classes which are Viewer and Feeder inherited from Thread class
 
